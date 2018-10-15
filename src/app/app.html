@@ -1,0 +1,29 @@
+<ion-split-pane when="(min-width: 475px)">
+<ion-menu type="reveal" [content]="content">
+
+  <ion-content>
+  <div class="center">
+    <img src="./assets/imgs/log.png" class="imagen">  
+  </div>
+  
+    <ion-list>
+        <button ion-item menuClose>
+          <ion-icon name="home"></ion-icon>&nbsp;Inicio
+        </button> 
+        <button menuClose ion-item *ngFor="let p of pages">
+         <ion-icon name="home"></ion-icon>&nbsp;inicio
+        </button>      
+        <button ion-item menuClose>
+          <ion-icon name="power"></ion-icon>&nbsp;Cerrar Sesion
+        </button>
+        <button ion-item menuClose (click)="acerca()">
+          <ion-icon name="code"></ion-icon>&nbsp;Acerca de la App
+        </button>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage"   main #content swipeBackEnabled="false"></ion-nav>
+</ion-split-pane>

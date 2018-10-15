@@ -1,0 +1,67 @@
+<ion-header>
+
+  <ion-navbar color="danger" class="menu">
+    <ion-title>{{area?.title}}</ion-title>
+
+    <!--ion-buttons end>
+      <button ion-button icon-left [navPush]="mapPlacesPage" [navParams]="{area: area, places$: places$}">
+        <ion-icon name="map"></ion-icon>
+        Mapa
+      </button>
+    </ion-buttons-->
+    
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+<ion-fab right bottom>
+    <button ion-fab color="you" [navPush]="mapPlacesPage" [navParams]="{area: area, places$: places$}">
+      <ion-icon name="pin"></ion-icon>
+    </button>
+  </ion-fab>
+<!--
+  <ion-card *ngFor="let place of places$ | async" [navPush]="placePage" [navParams]="place">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-4>
+            <img src="{{place?.images[0]}}" *ngIf="place.images" class="portlist"> 
+        
+        </ion-col>
+        <ion-col col-8 class="place-content">
+          <h2 color="danger"><b>{{place.title}}</b></h2>
+          
+          <div class="excerpt">{{place.excerpt}}</div>
+          <div float-right>
+            <ion-badge item-end>Ver mas
+                   <ion-icon name="arrow-forward"></ion-icon>
+            </ion-badge>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+  -->
+
+  <ion-card *ngFor="let place of places$ | async" [navPush]="placePage" [navParams]="place">
+  <img src="{{place?.images[0]}}" *ngIf="place.images" class="imgcard">
+  <ion-card-content>
+    <ion-card-title>
+      <b>{{place.title}}</b>
+      </ion-card-title>
+    <p>
+      {{place.excerpt}}
+    </p>
+  </ion-card-content>
+        <ion-row>
+          <ion-col text-right>
+            <ion-chip>
+              <ion-label>Ver Detalles</ion-label>
+              <ion-icon name="add" color="azul"></ion-icon>
+            </ion-chip>
+          </ion-col>
+        </ion-row>
+</ion-card>
+
+</ion-content>

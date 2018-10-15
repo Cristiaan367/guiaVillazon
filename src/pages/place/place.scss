@@ -1,0 +1,99 @@
+page-place {
+
+  ion-slides {
+    height: auto;
+  }
+
+  .swiper-pagination-bullet-active {
+    background-color: #222 !important;
+    width: 12px;
+    height: 12px;
+  }
+
+  .swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+  }
+
+  .place-description {
+    text-align: justify;
+  }
+
+  #map {
+    height: 250px;
+    width: 100%;
+  }
+
+  .content {
+    padding: 20px;
+
+    h2 {
+      margin-top: 0px;
+    }
+  }
+
+  #map-metadata {
+
+    text-align: center;
+    margin-top: 35px;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+
+    div {
+      width: 100%;
+    }
+
+    .duration {
+      margin-left: 5px;
+      color: green;
+      font-weight: 500;
+    }
+
+    .address {
+      font-size: 1.7rem;
+      font-weight: 500;
+    }
+
+    .walk-icon {
+      font-size: 2.5rem;
+    }
+
+
+  }
+
+  .btn-readme {
+    float: right;
+  }
+
+  .card{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px; /* 5px rounded corners */
+  }
+
+  .menu{
+    box-shadow: 0px 0px 7px 2px rgba(0,0,0,0.3);
+  }
+  
+  .imagen {
+    height: 200px;
+  }
+.fijo{
+  //position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: #ffffff;
+}
+  .contenido{
+    
+  }
+
+  .back{
+    padding: 10px;
+    padding-left: 20px;
+    background-color: #f2f2f2;
+  }
+
+}
+
+
