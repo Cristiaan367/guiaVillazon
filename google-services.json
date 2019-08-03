@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "177051075379",
+    "firebase_url": "https://gastronomia-chuquisaca.firebaseio.com",
+    "project_id": "gastronomia-chuquisaca",
+    "storage_bucket": "gastronomia-chuquisaca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:177051075379:android:6927db07e0435c4f",
+        "android_client_info": {
+          "package_name": "com.gastronomia.chuquisaca"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "177051075379-ve05bi7tp602h1n7c0jn26uhpd7ia1rt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUnLUXhhdqQJr9VUPN2qKsIFBcpLmDZtg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "177051075379-ve05bi7tp602h1n7c0jn26uhpd7ia1rt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

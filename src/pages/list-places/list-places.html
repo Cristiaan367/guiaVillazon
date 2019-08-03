@@ -18,7 +18,7 @@
 <ion-content>
 <ion-fab right bottom>
     <button ion-fab color="you" [navPush]="mapPlacesPage" [navParams]="{area: area, places$: places$}">
-      <ion-icon name="pin"></ion-icon>
+      <ion-icon name="md-map"></ion-icon>
     </button>
   </ion-fab>
 <!--
@@ -34,6 +34,7 @@
           
           <div class="excerpt">{{place.excerpt}}</div>
           <div float-right>
+          <button ion-button clear></button>
             <ion-badge item-end>Ver mas
                    <ion-icon name="arrow-forward"></ion-icon>
             </ion-badge>
@@ -41,27 +42,38 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-  </ion-card>
-  -->
+  </ion-card>-->
 
-  <ion-card *ngFor="let place of places$ | async" [navPush]="placePage" [navParams]="place">
-  <img src="{{place?.images[0]}}" *ngIf="place.images" class="imgcard">
-  <ion-card-content>
-    <ion-card-title>
-      <b>{{place.title}}</b>
-      </ion-card-title>
-    <p>
-      {{place.excerpt}}
-    </p>
-  </ion-card-content>
-        <ion-row>
-          <ion-col text-right>
-            <ion-chip>
-              <ion-label>Ver Detalles</ion-label>
-              <ion-icon name="add" color="azul"></ion-icon>
-            </ion-chip>
-          </ion-col>
-        </ion-row>
-</ion-card>
+<ion-grid>
+  <ion-row>
+    <ion-col *ngFor="let place of places$ | async" [navPush]="placePage" [navParams]="place" col-12 col-md-4 >
+      <ion-card>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-4>
+                <img src="{{place?.images[0]}}" *ngIf="place.images" class="portlist"> 
+            
+            </ion-col>
+            <ion-col col-8 class="place-content">
+              <h2 ion-text color=""><b>{{place.title}}</b></h2>
+              
+              <div ion-text color="gray" class="excerpt">{{place.excerpt}}</div>
+            </ion-col>
+            <ion-col>
+              <button ion-button full clear icon-start>
+                <ion-icon large name='md-add'></ion-icon>
+                  <b>mas informacion</b>
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+
+
+
 
 </ion-content>

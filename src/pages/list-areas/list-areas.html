@@ -8,7 +8,8 @@
     <ion-avatar item-start>
       
     </ion-avatar>
-    <ion-title><b>Guia Villazon</b></ion-title>
+    <div ><h3 class="title">Gastronomia Chuquisaca</h3></div>
+    <!--ion-title color="danger">Gastronomia Chuquisaca</ion-title-->
   </ion-navbar>
 
 </ion-header>
@@ -16,16 +17,27 @@
 
 <ion-content no-padding class="card-background-page">
 
-  <ion-card *ngFor="let area of areas$ | async">
-    <a [navPush]="listPlaces" [navParams]="area">
-      <img src="{{area.imageUrl}}"/>
-      <div class="card-title">
-        {{area.title}}
-        <div class="card-subtitle">
-          {{area.description}}
+<ion-grid>
+  <ion-row>
+    <ion-col *ngFor="let area of areas$ | async" col-12 col-md-4>
+        <div class="card">
+          <a [navPush]="listPlaces" [navParams]="area">
+            <img src="{{area.imageUrl}}"/>
+            <div class="card-title">
+              {{area.title}}
+              <div class="card-subtitle">
+                {{area.description}}
+              </div>
+            </div>
+          </a>
         </div>
-      </div>
-    </a>
-  </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+
+
+
+
 
 </ion-content>

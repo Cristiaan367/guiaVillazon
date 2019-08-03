@@ -1,0 +1,45 @@
+<ion-content>
+	<div class="port">
+	<img src="./assets/imgs/icon.png" class="pic">
+	</div>
+	<form (ngSubmit)="login()" [formGroup]="loginForm">
+		<ion-list inset>
+
+			<ion-item>
+				<ion-input type="text" placeholder="Correo electronico o Email" formControlName="email"></ion-input>
+			</ion-item>
+
+
+			<ion-item>
+				<ion-input type="password" placeholder="Contraseña" formControlName="password"></ion-input>
+			</ion-item>
+
+		</ion-list>
+
+		<div padding-horizontal>
+			
+
+			<button ion-button color="you" round full type="submit" >
+					<ion-icon name="person"></ion-icon>Iniciar Sesion</button>
+			<div class="login-footer">
+				<p>
+					<a (click)="signup()">Olvido Su Contraseña?</a>
+					If you're a new user, please sign up.
+				</p>
+			</div>
+
+			<ion-list>
+
+				<button ion-button color="you" round icon-left block outline (click)="loginWithGoogle()">
+					<ion-icon name="logo-google"></ion-icon>
+					Inicie Sesion con Google
+				</button>
+
+				<button ion-button color="you" round icon-left block outline (click)="signup()">
+					<ion-icon name="person-add"></ion-icon>
+					Registrese
+				</button>
+			</ion-list>
+		</div>
+	</form>
+</ion-content>

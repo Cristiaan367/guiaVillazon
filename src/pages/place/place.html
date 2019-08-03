@@ -5,72 +5,86 @@
 </ion-header>
 
 <ion-content no-padding>
-
-<div class="fijo">
-   <ion-slides #slider [pager]="true" [loop]="true" [autoplay]="5000" *ngIf="place?.images">
-    <ion-slide *ngFor="let image of place.images">
-      <img [src]="image" class="imagen" />
-    </ion-slide>
-  </ion-slides>
-</div>
-
-  <div class="content back">  
-      <h2>{{place.title}}</h2>
+    <!--class="fijo"-->
+  <div class="fijo">
+    <ion-slides #slider [pager]="true" [loop]="true" [autoplay]="5000" *ngIf="place?.images">
+      <ion-slide *ngFor="let image of place.images">
+        <img [src]="image" class="imagen" />
+      </ion-slide>
+    </ion-slides>
   </div>
-  <div class="place-description" padding-horizontal [innerHTML]="placeDescription"></div>
+    
+  <div class="content back"> 
+    <h2 class="izq">{{place.title}}</h2>
+    <button ion-button icon-start class="der" (click)="save()">
+        <ion-icon name="md-thumbs-up"></ion-icon> Guardar
+    </button>
+  </div>
+  <div class="place-description" *ngIf="place.description != '' " padding-horizontal [innerHTML]="placeDescription">
+  </div>
 
-  <ion-card class="card">
-      <ion-card-header color="secondary">
-          <h1 ion-text color="facebook">
-            <ion-icon name="md-contact"></ion-icon>
-            <b>Contacto</b>
-          </h1>       
-      </ion-card-header>
-      <ion-card-content>
-       <h2>{{place.contact}}</h2>
-      </ion-card-content>
+  <button class="btn-readme" ion-button clear (click)="readMore()" *ngIf="!isReadingMore"><ion-icon name="md-add"></ion-icon> Leer más</button>
+  <button class="btn-readme" ion-button clear (click)="readLess()" *ngIf="isReadingMore"><ion-icon name="md-remove"></ion-icon> Mostrar menos
+  </button>
+ 
+  <ion-card class="card" *ngIf="place.contact != '' ">
+    <ion-card-header>
+      <h1 ion-text color="rojost">
+        <ion-icon name="md-contact"></ion-icon>
+        <b>Contacto</b>
+      </h1>       
+    </ion-card-header>
+    <ion-card-content >
+      <div class="centro">
+        <h2><b>{{place.contact}}</b></h2>
+        <a ion-button outline round icon-start href="tel:{{place.contact}}" > <ion-icon name="md-call"></ion-icon>llamar</a>
+        <a ion-button outline round color="whatsapp" icon-start 
+         href="https://api.whatsapp.com/send?phone=591{{place.contact}}"> <ion-icon name="logo-whatsapp"></ion-icon>Whatsapp</a>
+        <a ion-button round full icon-start color="facebook" href="{{place.social}}"><ion-icon name="logo-facebook"></ion-icon> Facebook</a>
+      </div>
+    </ion-card-content>
   </ion-card>
-  <ion-card class="card">
-      <ion-card-header color="danger">
-          <h1 ion-text color="amarillo">
-            <ion-icon name="md-time"></ion-icon>
-            <b>Horario de Atencion</b>
-          </h1>
-            
-      </ion-card-header>
-      <ion-card-content>
-        <h2>{{place.hour}}</h2>
-      </ion-card-content>
+  <ion-card class="card" *ngIf="place.hour != '' ">
+    <ion-card-header>
+      <h1 ion-text color="rojost">
+      <ion-icon name="md-time"></ion-icon>
+      <b>Horario de Atencion</b></h1>
+    </ion-card-header>
+    <ion-card-content>
+      <h2>{{place.hour}}</h2>
+    </ion-card-content>
   </ion-card>
-  <ion-card class="card">
-      <ion-card-header color="secondary">
-          
-          <h1 ion-text color="secondary"><ion-icon name="md-information-circle"></ion-icon> <b>Informacion Util</b></h1>
-      </ion-card-header>
-      <ion-card-content>
-        <div [innerHTML]="placeDetail"></div>
-      </ion-card-content>
-  </ion-card>
-  <ion-card class="card">
-      <ion-card-header color="facebook">
-          <h1 ion-text color="azul">
-            <ion-icon name="pin"></ion-icon>
-            <b>Direccion</b>
-          </h1>
-      </ion-card-header>
-      <ion-card-content>
+  <ion-card class="card" *ngIf="place.address != '' ">
+    <ion-card-header>
+      <h1 ion-text color="rojost">
+      <ion-icon name="pin"></ion-icon>
+      <b>Direccion</b></h1>
+    </ion-card-header>
+    <ion-card-content>
         <h2>{{place.address}}</h2>
-      </ion-card-content>
+    </ion-card-content>
   </ion-card>
+  <ion-card class="card">
+    <ion-card-header>
+      <h1 ion-text color="rojost">
+      <ion-icon name="md-information-circle">
+      </ion-icon> <b>Detalles</b></h1>
+    </ion-card-header>
+    <ion-card-content>
+        <div [innerHTML]="placeDetail"></div>
+    </ion-card-content>
+  </ion-card>
+    <!--<ion-col col-12 col-md-4>
+      <div #map id="map"></div><ion-icon name="restaurant"></ion-icon>
 
-  <div #map id="map"></div>
+    </ion-col>-->
 
-   <ion-fab right bottom>
-    <button ion-fab color="you"><ion-icon name="md-link"></ion-icon></button>
-    <ion-fab-list side="left">
-      <button ion-fab color="facebook"><ion-icon name="logo-facebook"></ion-icon></button>
-      <button ion-fab color="whatsapp"><ion-icon name="logo-whatsapp"></ion-icon></button>
-    </ion-fab-list>
+
+ 
+
+
+  <ion-fab right bottom>
+    <a ion-fab [navPush]="platosPage" [navParams]="place.$key"><ion-icon name="md-restaurant"></ion-icon></a>
   </ion-fab>
 
 <!--div class="content" [hidden]="!ver">
@@ -78,31 +92,9 @@
     <button class="btn-readme" ion-button clear (click)="readMore()" *ngIf="!isReadingMore">Leer más</button>
     <button class="btn-readme" ion-button clear (click)="readLess()" *ngIf="isReadingMore">Mostrar menos</button>
 </div-->
-
-
-  <div padding [hidden]="!verDetalle">
-    <hr>
-    <ion-card class="card">
-      <ion-card-header color="danger">
-          <h1><b>Detalles</b></h1>
-      </ion-card-header>
-      <ion-card-content>
-        <div [innerHTML]="placeDetail"></div>
-      </ion-card-content>
-    </ion-card>
-    
-  </div>
-
-  <div [hidden]="!verMapa">
+  
+  <div #map id="map"></div>
   <div id="map-metadata">
-    <ion-card class="card">
-      <ion-card-header color="danger">
-          <b>Direccion</b>
-      </ion-card-header>
-      <ion-card-content>
-        <h2>{{place.address}}</h2>
-      </ion-card-content>
-    </ion-card>
     <div *ngIf="(duration && isDisplayingRoute)">
       <ion-icon name="walk" class="walk-icon"></ion-icon>
       <span item-left class="duration">{{duration}}</span>
@@ -110,31 +102,19 @@
     </div>
   </div>
 
-  
-  <div #map id="map"></div>
 
-    <ion-card class="card">
-      <ion-card-header color="danger">
-          <b>Nota</b>
-      </ion-card-header>
-      <ion-card-content>
-        Para obtener una ruta mas exacta  debe activar
-        el GPS de su dispositivo.
-      </ion-card-content>
-    </ion-card>
 
-  <button ion-button full round (click)="displayRoute()" *ngIf="!isDisplayingRoute">
-    <ion-icon large name='compass'></ion-icon>
-    &nbsp;&nbsp;Cómo llegar
-  </button>
+<button ion-button color="secondary" full round (click)="displayRoute()" *ngIf="!isDisplayingRoute">
+  <ion-icon large name='compass'></ion-icon>
+  &nbsp;&nbsp;Cómo llegar
+</button>
 
-  <button ion-button full round (click)="displayPlaceLocation()" *ngIf="isDisplayingRoute">
-    <ion-icon large name='pin'></ion-icon>
+<button ion-button full round (click)="displayPlaceLocation()" *ngIf="isDisplayingRoute">
+  <ion-icon large name='pin'></ion-icon>
     &nbsp;&nbsp;Ubicación del lugar
-  </button>
+</button>
 
   <!--<ion-fab right bottom>
     <button ion-fab mini (click)="navigate()"><ion-icon name="navigate"></ion-icon></button>
   </ion-fab-->  
-  </div>
 </ion-content>

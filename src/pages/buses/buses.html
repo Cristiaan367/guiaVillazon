@@ -1,0 +1,36 @@
+<!--
+  Generated template for the BusesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Itinerario Salidas </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+<div class="center">
+  <img src="./assets/imgs/nueva terminal.jpg" class="center">
+</div>
+<ion-list>
+<ion-grid>
+  <ion-row>
+    <ion-col *ngFor="let destino of destinos" col-12 col-md-6>
+       <ion-item>
+        <ion-icon name="md-bus" item-start large ></ion-icon>
+        <h1><b>{{destino.empresa}}</b></h1>
+        <h3>Destino: {{destino.destino}}</h3>
+        <h3>Hora Salida: {{destino.hora}}</h3>
+        <ion-badge item-end>{{destino.destino}}</ion-badge>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</ion-list>
+
+</ion-content>

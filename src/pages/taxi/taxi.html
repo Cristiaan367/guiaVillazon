@@ -1,0 +1,41 @@
+<ion-header>
+
+  <ion-navbar color="danger">
+    <ion-title>Paradas de taxi</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+<ion-card>
+
+  <ion-card-header>
+    Tarifas
+  </ion-card-header>
+
+  <ion-card-content>
+    <p>Linea de taxis <b>20  de mayo</b> y <b>ATL</b> <br>
+    el Costo es de 4 Bs. Por Persona y apartir de las 12:00 de la noche es 5bs.
+    </p>
+  </ion-card-content>
+
+   <ion-row>
+    <ion-col>
+      <a ion-button icon-start clear small href="tel:25972200">
+        <ion-icon name="md-call"></ion-icon>
+        <div> 20 de Mayo</div>
+      </a>
+    </ion-col>
+    <ion-col>
+      <a ion-button color="secondary" icon-start clear small href="tel:2595900">
+        <ion-icon name="md-call"></ion-icon>
+        <div>ATL</div>
+      </a>
+    </ion-col>
+  </ion-row>
+
+</ion-card>
+
+<div #map id="map"></div>
+</ion-content>

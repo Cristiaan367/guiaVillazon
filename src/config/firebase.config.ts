@@ -1,9 +1,9 @@
 
 export const FirebaseConfig = {
-   apiKey: "AIzaSyD8fAyrlo8ix9UoFeDFSjQ8rsFDX2wHBvs",
- 	authDomain: "appvillazonplaces.firebaseapp.com",
-    databaseURL: "https://appvillazonplaces.firebaseio.com",
-    projectId: "appvillazonplaces",
-    storageBucket: "appvillazonplaces.appspot.com",
-    messagingSenderId: "173289610757"
+apiKey: "AIzaSyAqA11sd-eO6qdIFEPJVzxh39CrV2wIM5I",
+    authDomain: "gastronomia-chuquisaca.firebaseapp.com",
+    databaseURL: "https://gastronomia-chuquisaca.firebaseio.com",
+    projectId: "gastronomia-chuquisaca",
+    storageBucket: "gastronomia-chuquisaca.appspot.com",
+    messagingSenderId: "177051075379"
 }

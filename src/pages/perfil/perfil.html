@@ -1,0 +1,51 @@
+<!--
+  Generated template for the PerfilPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title> <ion-icon name="md-person"></ion-icon> Perfil de Usuario</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-card>
+      <!--*ngIf="auth.getEmail()">{{auth.getEmail()}}-->
+        <ion-item>
+          <ion-avatar item-start *ngIf="auth.getpic()">
+            <img src="{{auth.getpic()}}">
+          </ion-avatar>
+          <h2 *ngIf="auth.getEmail()">Correo: {{auth.getEmail()}}</h2>
+          <p *ngIf="auth.getid()">Id Usuario: {{auth.getid()}}</p>
+        </ion-item>
+      
+        <img src="">
+      
+        <ion-card-content>
+          <p *ngIf="auth.getName()">Nombre Usuario: {{auth.getName()}}</p>
+        </ion-card-content>
+        <button ion-button color="primary" full round icon-start [navPush]="listRestPage" [navParams]="auth.getid()">
+          <ion-icon name="add"></ion-icon> Crear Nuevo Restaurante </button>
+        <button ion-button color="you" full round icon-start (click)="logout()">
+            <ion-icon name="log-out"></ion-icon> Cerrar Sesion </button>        
+    </ion-card>
+    <p>Lista de Favoritos</p>
+    <ion-list>
+        <ion-item *ngFor="let place of places$ | async" [navPush]="placePage" [navParams]="place">
+          <ion-thumbnail item-start>
+            <img src="{{place?.images[0]}}" *ngIf="place.images">
+          </ion-thumbnail>
+          <h2>{{place.title}}</h2>
+          <p>{{place.excerpt}}</p>
+          <button ion-button clear item-end>Mas..</button>
+        </ion-item>
+      </ion-list>
+      <button ion-button color="secondary" full round icon-start (click)="delete()"> 
+          <ion-icon name="md-trash"></ion-icon> Vaciar Lista
+      </button>
+</ion-content>

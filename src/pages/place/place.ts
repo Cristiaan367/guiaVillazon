@@ -5,6 +5,9 @@ import { PlaceMapService } from './../../shared/model/maps/place-map.service';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { AlertController, LoadingController } from 'ionic-angular';
 import { ShortenPipe } from "../../pipes/shorten.pipe";
+import { PlatosPage } from  '../platos/platos';
+import { AuthService } from '../../shared/auth/auth.service';
+import { PlaceService } from   '../../shared/model/place/place.service';
 
 @IonicPage()
 @Component({
@@ -24,13 +27,33 @@ export class PlacePage {
   placeDetail:string;
   ver:boolean = false;
   verDetalle:boolean = false;
-  verMapa:boolean = false;
+  verMapa:boolean = true;
+  platosPage = PlatosPage;
+  idplace;
+  iduser;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public placeMapService: PlaceMapService, private launchNavigator: LaunchNavigator, public alertCtrl: AlertController, public loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+     public placeMapService: PlaceMapService, private launchNavigator: LaunchNavigator,
+      public alertCtrl: AlertController, public loadingCtrl: LoadingController,
+      public auth: AuthService, public placeServ: PlaceService) {
     this.place = navParams.data;
     this.placeDescription = this.shortenDescription(this.place.description);
     this.placeDetail =  this.place.detail;
+    this.idplace = this.place.$key;
+    this.iduser = this.auth.getid();
+
     this.mostrar();
+  }
+
+  save(){
+    const alert = this.alertCtrl.create({
+      title: 'Guardado..',
+      subTitle: 'Restaurante Guardado Guardado en lista de Favoritos..',
+      buttons: ['OK']
+    });
+    alert.present();
+    this.placeServ.savePlace(this.iduser,this.idplace);
+    console.log("place: "+this.idplace+" user: "+this.iduser);
   }
 
   shortenDescription(description: string): string {
@@ -93,6 +116,7 @@ export class PlacePage {
   }
 
   displayDistanceAndTime() {
+    this.Alerta();
     this.distance = this.placeMapService.distance;
     this.duration = this.placeMapService.duration;
     this.loading.dismiss();
@@ -118,6 +142,15 @@ export class PlacePage {
     this.ver = false;
     this.verDetalle= false;
     this.verMapa=true;
+  }
+
+  Alerta(){
+    const alert = this.alertCtrl.create({
+      title: 'Nota GPS',
+      subTitle: 'Para Mayor Presision de la ruta debe activar el Gps de su telefono..',
+      buttons: ['OK']
+    });
+    alert.present();
   }
 
 }

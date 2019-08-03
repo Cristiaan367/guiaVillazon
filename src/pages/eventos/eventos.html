@@ -1,0 +1,50 @@
+<ion-header>
+
+  <ion-navbar color="danger">
+    <ion-title>Eventos y noticias de Villazon </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+<ion-grid>
+  <ion-row>
+    <ion-col col-12 col-md-4 *ngFor="let event of events$ | async">
+        <ion-card >
+
+          <ion-item>
+            <ion-avatar item-start>
+              <img src="./assets/imgs/log.png">
+            </ion-avatar>
+            <h2>{{event.title}}</h2>
+            
+            <p> fecha: {{event.date | date:'fullDate'}}</p>
+          </ion-item>
+
+          <img src="{{event.images}}">
+
+          <ion-card-content>
+            <div [innerHTML]="event.description"></div>
+          </ion-card-content>
+
+          <ion-item>
+            <ion-icon name="md-time" item-start large></ion-icon>
+            <h2>Hora</h2>
+            <p>{{event.time}}</p>
+          </ion-item>
+
+          <ion-item>
+            <ion-icon name="md-navigate" item-start large ></ion-icon>
+            <h2>Lugar</h2>
+            <p>{{event.place}}</p>
+          </ion-item>
+
+        </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+
+
+</ion-content>

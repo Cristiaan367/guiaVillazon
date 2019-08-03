@@ -1,24 +1,24 @@
-<ion-split-pane when="(min-width: 475px)">
 <ion-menu type="reveal" [content]="content">
 
-  <ion-content>
-  <div class="center">
-    <img src="./assets/imgs/log.png" class="imagen">  
-  </div>
-  
+  <ion-content padding>
     <ion-list>
-        <button ion-item menuClose>
-          <ion-icon name="home"></ion-icon>&nbsp;Inicio
-        </button> 
-        <button menuClose ion-item *ngFor="let p of pages">
-         <ion-icon name="home"></ion-icon>&nbsp;inicio
-        </button>      
-        <button ion-item menuClose>
-          <ion-icon name="power"></ion-icon>&nbsp;Cerrar Sesion
+        <button ion-item menuClose icon-start (click)="home()">
+          <ion-icon name="home"></ion-icon>Inicio
+        </button>       
+        <button ion-item menuClose icon-start (click)="eventoPag()">
+          <ion-icon name="md-calendar"></ion-icon>Eventos
         </button>
-        <button ion-item menuClose (click)="acerca()">
-          <ion-icon name="code"></ion-icon>&nbsp;Acerca de la App
+        <button ion-item menuClose icon-start (click)="perfil()">
+          <ion-icon name="md-person"></ion-icon>Perfil usuario
         </button>
+        <button ion-item menuClose icon-start (click)="logout()">
+          <ion-icon name="md-power"></ion-icon>Cerrar Session
+        </button>
+        <ion-item>
+            <ion-label>Español/Ingles</ion-label>
+            <ion-toggle  checked="false"></ion-toggle>
+        </ion-item>
+        
     </ion-list>
   </ion-content>
 
@@ -26,4 +26,3 @@
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
 <ion-nav [root]="rootPage"   main #content swipeBackEnabled="false"></ion-nav>
-</ion-split-pane>

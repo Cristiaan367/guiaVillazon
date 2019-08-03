@@ -20,7 +20,7 @@ page-place {
   }
 
   #map {
-    height: 250px;
+    height: 300px;
     width: 100%;
   }
 
@@ -83,6 +83,7 @@ page-place {
   position: sticky;
   top: 0;
   background-color: #ffffff;
+  z-index: 1;
 }
   .contenido{
     
@@ -92,8 +93,23 @@ page-place {
     padding: 10px;
     padding-left: 20px;
     background-color: #f2f2f2;
+    padding: .5em;
+    overflow: hidden;
   }
 
+  .centro{
+    position: static;
+    text-align: center;
+    
+  }
+
+  .der{
+    float: right;
+  }
+  .izq{
+    float: left;
+    padding-top: 10px;
+  }
 }
 
 

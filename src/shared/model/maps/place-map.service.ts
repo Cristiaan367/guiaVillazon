@@ -82,7 +82,7 @@ export class PlaceMapService {
   }
 
   private getRoute(placePosition: any, userPosition: any) {
-    
+    /*travelMode: google.maps.TravelMode.WALKING DRIVING*/
     let directionsService = new google.maps.DirectionsService;
     let routeRequest = {
       origin: new google.maps.LatLng(userPosition.latitude, userPosition.longitude),

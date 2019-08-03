@@ -5,7 +5,7 @@ import { FirebaseService } from '../common/firebase.service';
 import { Place } from './place';
 import * as firebase from 'firebase';
 import * as _ from 'lodash';
-
+import { AuthService } from '../../auth/auth.service';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/observable/combineLatest';
 
@@ -13,7 +13,7 @@ import 'rxjs/add/observable/combineLatest';
 @Injectable()
 export class PlaceService extends FirebaseService {
 
-  constructor(private db: AngularFireDatabase) {
+  constructor(private db: AngularFireDatabase, public auth:AuthService) {
     super();
   }
 
@@ -35,6 +35,24 @@ export class PlaceService extends FirebaseService {
       .map(this.sortPlacesByPriority);
   }
 
+  findByAdmin(userId: string): Observable<Place[]> {
+
+    return this.db.list(`/placesPerAdmin/${userId}`)
+      .map(places => places.map(place => place.$key))
+      .map(places => places.map(placeKey => this.db.object(`/places/${placeKey}`)))
+      .flatMap(places => (places.length === 0) ? Observable.of([]) : Observable.combineLatest(places))
+      .map(this.sortPlacesByPriority);
+  }
+
+  findByUser(userId: string): Observable<Place[]> {
+
+    return this.db.list(`/userPerPlace/${userId}`)
+      .map(places => places.map(place => place.$key))
+      .map(places => places.map(placeKey => this.db.object(`/places/${placeKey}`)))
+      .flatMap(places => (places.length === 0) ? Observable.of([]) : Observable.combineLatest(places))
+      .map(this.sortPlacesByPriority);
+  }
+
   sortPlacesByPriority(places: Place[]): Place[] {
     return places.sort((a: Place, b: Place) => {
       return a.priority -  b.priority;
@@ -43,12 +61,46 @@ export class PlaceService extends FirebaseService {
 
   create(place: Place): Observable<any> {
     delete place.$key;
-
+    let admin = this.auth.getid();
     const newPlaceKey: string = this.db.list('/places').push(null).key;
     let updates: any = {};
 
     updates[`/places/${newPlaceKey}`] = place;
     updates[`/placesPerArea/${place.areaId}/${newPlaceKey}`] = true;
+    updates[`/placesPerAdmin/${admin}/${newPlaceKey}`] = true;
+
+    const action: firebase.Promise<any> = this.db.object('/').update(updates);
+    return super.actionAsObservable(action);
+
+  }
+
+  saveCords(lat, lng, plc){
+
+    let updates: any = {};
+
+    updates[`/places/${plc.$key}/latitude`] = lat;
+    updates[`/places/${plc.$key}/longitude`] = lng;
+
+    const action: firebase.Promise<any> = this.db.object('/').update(updates);
+    return super.actionAsObservable(action);
+  }
+
+  /*public saveFruit(fruit){
+    let key = this.afDB.list('/fruits/').push(fruit).key;
+    //Guardamos la fruta y obetenemos el id que firebase pone al nudulo de nuestra fruta.
+    //Al guardarse sin id nuestra fruta, ahora la actualizamos con el id que firebase nos devuelve.
+    fruit.id = key;
+    this.afDB.database.ref('fruits/'+fruit.id).set(fruit);
+   }*/
+
+  savePlace(user, idplace): Observable<any> {
+    //delete place.$key;
+
+    //const newPlaceKey: string = this.db.list('/userPerPlace').push(null).key;
+    let updates: any = {};
+
+    //updates[`/places/${newPlaceKey}`] = place;
+    updates[`/userPerPlace/${user}/${idplace}`] = true;
 
     const action: firebase.Promise<any> = this.db.object('/').update(updates);
     return super.actionAsObservable(action);
@@ -63,11 +115,23 @@ export class PlaceService extends FirebaseService {
     return super.actionAsObservable(action);
   }
 
-  delete(place: Place): Observable<any> {
+  delete(place: Place,idAdmin): Observable<any> {
     let updates: any = {};
 
     updates[`/places/${place.$key}`] = null;
     updates[`/placesPerArea/${place.areaId}/${place.$key}`] = null;
+    updates[`/placesPerAdmin/${idAdmin}/${place.$key}`] = null;
+
+
+    const action: firebase.Promise<any> = this.db.object('/').update(updates);
+    return super.actionAsObservable(action);
+  }
+
+  deleteFav(user): Observable<any> {
+    let updates: any = {};
+
+    //updates[`/places/${place.$key}`] = null;
+    updates[`/userPerPlace/${user}`] = null;
 
     const action: firebase.Promise<any> = this.db.object('/').update(updates);
     return super.actionAsObservable(action);
@@ -96,6 +160,13 @@ export class PlaceService extends FirebaseService {
       }
     );
 
+  }
+
+  guardarCordenadas(id, lat, lng){
+    var updates={};
+    updates['/place/'+id+'/lat']=lat;
+    updates['/place/'+id+'/lng']=lng;
+     return this.db.object('/').update(updates);
   }
 
 }

@@ -2,12 +2,13 @@ page-list-areas {
 
   .card-background-page {
 
-    ion-card {
+    .card {
       position: relative;
       text-align: center;
       background: #000;
       overflow: hidden;
       text-shadow: 2px 2px #333;
+      height: 154px;
     }
 
     .card-title {
@@ -24,8 +25,9 @@ page-list-areas {
       position: absolute;
       width: 100%;
       color: #fff;
-      margin-top: 5px;
+      margin-top: 0px;
     }
+
 
   }  
 
@@ -36,6 +38,7 @@ page-list-areas {
       height: 154px;
       z-index: 1;
       opacity: 0.8;
+      padding: 0px;
   }
 
   .menu{
@@ -44,6 +47,9 @@ page-list-areas {
 
   .portArea{
     height: 154px;
+  }
+  .title{
+    color: red;
   }
 
 }
