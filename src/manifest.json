@@ -1,10 +1,10 @@
 {
-  "name": "Guia Movil Villazon",
-  "short_name": "GMV",
+  "name": "Gastronomia Chuquisaca",
+  "short_name": "Chuquisaca",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{
-    "src": "assets/imgs/log2.png",
+    "src": "assets/imgs/icon.png",
     "sizes": "512x512",
     "type": "image/png"
   }],

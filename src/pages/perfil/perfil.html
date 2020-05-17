@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="you">
     <ion-title> <ion-icon name="md-person"></ion-icon> Perfil de Usuario</ion-title>
   </ion-navbar>
 
@@ -15,7 +15,19 @@
 
 <ion-content padding>
     <ion-card>
-      <!--*ngIf="auth.getEmail()">{{auth.getEmail()}}-->
+        <img src="{{auth.getpic()}}" *ngIf="auth.getpic()" />
+        <ion-card-content>
+          <ion-card-title *ngIf="auth.getName()">
+            {{auth.getName()}}
+            </ion-card-title>
+            <p *ngIf="auth.getid()">Id Usuario: {{auth.getid()}}</p>
+            <p *ngIf="auth.getEmail()">Correo: {{auth.getEmail()}}</p>
+        </ion-card-content>
+        <button ion-button color="you" full clear icon-start (click)="logout()">
+            <ion-icon name="log-out"></ion-icon> Cerrar Sesion </button>
+    </ion-card>
+    <!--ion-card>
+      <!--*ngIf="auth.getEmail()">{{auth.getEmail()}}
         <ion-item>
           <ion-avatar item-start *ngIf="auth.getpic()">
             <img src="{{auth.getpic()}}">
@@ -28,13 +40,14 @@
       
         <ion-card-content>
           <p *ngIf="auth.getName()">Nombre Usuario: {{auth.getName()}}</p>
-        </ion-card-content>
-        <button ion-button color="primary" full round icon-start [navPush]="listRestPage" [navParams]="auth.getid()">
-          <ion-icon name="add"></ion-icon> Crear Nuevo Restaurante </button>
-        <button ion-button color="you" full round icon-start (click)="logout()">
-            <ion-icon name="log-out"></ion-icon> Cerrar Sesion </button>        
-    </ion-card>
-    <p>Lista de Favoritos</p>
+        </ion-card-content>       
+    </ion-card>-->
+
+    <!--button ion-button color="primary" full icon-start [navPush]="listRestPage" [navParams]="auth.getid()">
+      <ion-icon name="add"></ion-icon> Crear Nuevo Restaurante </button-->
+     
+    
+        <p>Lista de Favoritos</p>
     <ion-list>
         <ion-item *ngFor="let place of places$ | async" [navPush]="placePage" [navParams]="place">
           <ion-thumbnail item-start>
@@ -45,7 +58,11 @@
           <button ion-button clear item-end>Mas..</button>
         </ion-item>
       </ion-list>
-      <button ion-button color="secondary" full round icon-start (click)="delete()"> 
+      <button ion-button color="primary" full icon-start (click)="delete()"> 
           <ion-icon name="md-trash"></ion-icon> Vaciar Lista
       </button>
+
+      <ion-fab right bottom>
+          <button ion-fab color="rojost" [navPush]="listRestPage" [navParams]="auth.getid()" ><ion-icon name="md-send"></ion-icon></button>
+        </ion-fab>
 </ion-content>

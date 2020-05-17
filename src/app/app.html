@@ -1,24 +1,30 @@
 <ion-menu type="reveal" [content]="content">
-
-  <ion-content padding>
+  <ion-content>
+      <div class="port">
+          <img src="./assets/imgs/icon.png" class="pic">
+      </div>
     <ion-list>
         <button ion-item menuClose icon-start (click)="home()">
           <ion-icon name="home"></ion-icon>Inicio
+        </button>
+        <button ion-item menuClose icon-start (click)="search()">
+          <ion-icon name="md-search"></ion-icon>Busqueda
         </button>       
         <button ion-item menuClose icon-start (click)="eventoPag()">
-          <ion-icon name="md-calendar"></ion-icon>Eventos
+          <ion-icon name="md-calendar"></ion-icon>Eventos y noticias
         </button>
         <button ion-item menuClose icon-start (click)="perfil()">
-          <ion-icon name="md-person"></ion-icon>Perfil usuario
+          <ion-icon name="md-person"></ion-icon>Perfil de Usuario
+        </button>
+        <button ion-item menuClose icon-start (click)="sugerencias()">
+          <ion-icon name="md-restaurant"></ion-icon>Mi Restaurante
+        </button>
+        <button ion-item menuClose icon-start (click)="about()">
+          <ion-icon name="md-help"></ion-icon>Acerca de..
         </button>
         <button ion-item menuClose icon-start (click)="logout()">
           <ion-icon name="md-power"></ion-icon>Cerrar Session
         </button>
-        <ion-item>
-            <ion-label>Español/Ingles</ion-label>
-            <ion-toggle  checked="false"></ion-toggle>
-        </ion-item>
-        
     </ion-list>
   </ion-content>
 

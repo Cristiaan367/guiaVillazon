@@ -8,6 +8,7 @@ import { ShortenPipe } from "../../pipes/shorten.pipe";
 import { PlatosPage } from  '../platos/platos';
 import { AuthService } from '../../shared/auth/auth.service';
 import { PlaceService } from   '../../shared/model/place/place.service';
+import { ComentariosPage } from '../comentarios/comentarios'
 
 @IonicPage()
 @Component({
@@ -29,6 +30,7 @@ export class PlacePage {
   verDetalle:boolean = false;
   verMapa:boolean = true;
   platosPage = PlatosPage;
+  comentarioPage = ComentariosPage;
   idplace;
   iduser;
 

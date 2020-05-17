@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 import AuthProvider = firebase.auth.AuthProvider;
 
@@ -7,10 +8,14 @@ import AuthProvider = firebase.auth.AuthProvider;
 export class AuthService {
 	private user: firebase.User;
 
-	constructor(public afAuth: AngularFireAuth) {
+	public userProfile: any;
+	usuario: any;
+	constructor(public afAuth: AngularFireAuth, public db: AngularFireDatabase ) {
 		afAuth.authState.subscribe(user => {
 			this.user = user;
 		});
+
+		this.userProfile = firebase.database().ref('users');
 	}
 
 	signInWithEmail(credentials) {
@@ -20,7 +25,18 @@ export class AuthService {
 	}
 
 	signUp(credentials) {
-		return this.afAuth.auth.createUserWithEmailAndPassword(credentials.email,credentials.password);
+		return this.afAuth.auth.createUserWithEmailAndPassword(credentials.email, credentials.password).then((newUser)=>{
+			this.afAuth.auth.signInWithEmailAndPassword(credentials.email, credentials.password).then((authenticatedUser)=>{
+				this.userProfile.child(authenticatedUser.uid).set(
+					credentials
+				);
+			});
+		});
+
+		//return this.afAuth.auth.createUserWithEmailAndPassword(credentials.email,credentials.password).then( success => {
+        //    console.log("Firebase success: " + JSON.stringify(success));
+        //    this.userProfile.child(success.uid).set(success);
+        //  });
 	}
 
 	get authenticated(): boolean {
@@ -48,6 +64,7 @@ export class AuthService {
 		console.log('Sign in with google');
 		return this.oauthSignIn(new firebase.auth.GoogleAuthProvider());
 	}
+	
 
 	private oauthSignIn(provider: AuthProvider) {
 		if (!(<any>window).cordova) {
@@ -61,6 +78,7 @@ export class AuthService {
 					let token = result.credential.accessToken;
 					// The signed-in user info.
 					let user = result.user;
+
 					console.log(token, user);
 				}).catch(function(error) {
 					// Handle Errors here.
@@ -69,5 +87,9 @@ export class AuthService {
 			});
 		}
 	}
+
+	find(key: string){
+		//return this.db.object(`/areas/${key}`).map(this.usuario.fromJSON);
+	  }
 
 }

@@ -1,22 +1,16 @@
 <ion-header>
 
-  <ion-navbar color="danger">
-    <ion-title>Eventos y noticias de Villazon </ion-title>
+  <ion-navbar color="you">
+    <ion-title>Eventos y noticias</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-<ion-grid>
-  <ion-row>
-    <ion-col col-12 col-md-4 *ngFor="let event of events$ | async">
+<ion-content>
+    <ion-list *ngFor="let event of events$ | async">
         <ion-card >
-
           <ion-item>
-            <ion-avatar item-start>
-              <img src="./assets/imgs/log.png">
-            </ion-avatar>
             <h2>{{event.title}}</h2>
             
             <p> fecha: {{event.date | date:'fullDate'}}</p>
@@ -41,9 +35,7 @@
           </ion-item>
 
         </ion-card>
-    </ion-col>
-  </ion-row>
-</ion-grid>
+    </ion-list>
 
 
 

@@ -1,6 +1,6 @@
 <ion-header>
 
-  <ion-navbar color="danger" class="menu">
+  <ion-navbar color="you" class="menu">
     <ion-title>{{area?.title}}</ion-title>
 
     <!--ion-buttons end>
@@ -9,9 +9,26 @@
         Mapa
       </button>
     </ion-buttons-->
-    
-  </ion-navbar>
+    <ion-buttons end>
+        <button ion-button icon-start (click)="sort()">
+            <ion-icon name="md-repeat"></ion-icon>
+        </button>
+        <button ion-button icon-start (click)="buscarAlert()">
+          <ion-icon name="md-search"></ion-icon>
+        </button>
+      </ion-buttons>
 
+  </ion-navbar>
+  <ion-toolbar color="you" no-border-top>
+  <ion-segment [(ngModel)]="mod" color="light">
+    <ion-segment-button value="rest">
+      Restaurantes
+    </ion-segment-button>
+    <ion-segment-button value="info">
+      mas informacion
+    </ion-segment-button>
+  </ion-segment>
+  </ion-toolbar>
 </ion-header>
 
 
@@ -43,34 +60,92 @@
       </ion-row>
     </ion-grid>
   </ion-card>-->
-
-<ion-grid>
-  <ion-row>
-    <ion-col *ngFor="let place of places$ | async" [navPush]="placePage" [navParams]="place" col-12 col-md-4 >
-      <ion-card>
-        <ion-grid>
-          <ion-row>
-            <ion-col col-4>
-                <img src="{{place?.images[0]}}" *ngIf="place.images" class="portlist"> 
-            
-            </ion-col>
-            <ion-col col-8 class="place-content">
-              <h2 ion-text color=""><b>{{place.title}}</b></h2>
+  <div [ngSwitch]="mod">
+    <div *ngSwitchCase="'rest'">
+      <ion-item>
+        <ion-label>Buscar Por Tipo de restaurante</ion-label>
+        <ion-select [(ngModel)]="term" interface="popover">
+            <ion-option value="">Todos</ion-option>
+          <ion-option value="cafe restaurant">cafe restaurant</ion-option>
+          <ion-option value="gourmet">Gourmet</ion-option>
+          <ion-option value="especialidad">especialidad</ion-option>
+          <ion-option value="familiar">Familiar</ion-option>
+          <ion-option value="comida rapida">Comida rapida</ion-option>
+          <ion-option value="Vegetariano">Vegetariano</ion-option>
+          <ion-option value="nacional y tradicional">Nacional y tradicional</ion-option>
+          
+        </ion-select>
+    </ion-item>
+  
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let place of places$ | async | tipo : term | buscar: terms | sortBy:ordenar:'title'" [navPush]="placePage" [navParams]="place" col-12 col-md-4 >
+        <ion-card *ngIf="place.enabled">
+          <ion-grid>
+            <ion-row >
+              <ion-col col-4>
+                  <img src="{{place?.images[0]}}" *ngIf="place.images" class="avatar" alt="">
+                  <img src="../../assets/imgs/alter.png" *ngIf="!place.images" class="avatar" alt="">
               
-              <div ion-text color="gray" class="excerpt">{{place.excerpt}}</div>
-            </ion-col>
-            <ion-col>
-              <button ion-button full clear icon-start>
-                <ion-icon large name='md-add'></ion-icon>
-                  <b>mas informacion</b>
-              </button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card>
-    </ion-col>
-  </ion-row>
-</ion-grid>
+              </ion-col>
+              <ion-col col-8 class="place-content">
+                <h2 ion-text color=""><b>{{place.title}}</b></h2>
+                <div ion-text color="gray" class="excerpt">{{place.excerpt}}</div>
+                <ion-buttons end class="">
+                  <button ion-button clear icon-only color="dark">
+                    <ion-icon name="more"></ion-icon>
+                  </button>
+                </ion-buttons>
+              </ion-col>
+              <ion-col>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+    </div>
+    <div *ngSwitchCase="'info'">
+      <ion-card> 
+        <img src="{{area.imageUrl}}" alt="">     
+        <ion-card-content>
+          <ion-card-title>
+            {{area.title}}
+          </ion-card-title>
+          <p>
+              {{area.description}}
+          </p>
+        </ion-card-content>
+    </ion-card>
+    <ion-card>    
+        <ion-card-content>
+          <ion-card-title>
+            Gastronomia
+          </ion-card-title>
+          <div [innerHTML]="area.gastronomy"></div>
+        </ion-card-content>
+    </ion-card>
+    <ion-card>    
+        <ion-card-content>
+          <ion-card-title>
+            Atractivos Turisticos
+          </ion-card-title>
+          <div [innerHTML]="area.tour"></div>
+        </ion-card-content>
+    </ion-card>
+    <ion-card>    
+        <ion-card-content>
+          <ion-card-title>
+            festividades
+          </ion-card-title>
+          <div [innerHTML]="area.festivity"></div>
+        </ion-card-content>
+    </ion-card>
+    </div>
+    </div>
+  
 
 
 

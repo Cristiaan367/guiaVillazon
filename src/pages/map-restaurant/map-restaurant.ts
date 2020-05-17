@@ -1,10 +1,11 @@
 import { Component} from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform, AlertController} from 'ionic-angular';
 import { PlaceMapService } from '../../shared/model/maps/place-map.service';
 import { PlaceService } from '../../shared/model/place/place.service';
 import {Geolocation} from '@ionic-native/geolocation';
 import { Location } from '../../shared/model/location/location';
 import { Place } from '../../shared/model/place/place';
+import { PictureRestauratPage } from '../../pages/picture-restaurat/picture-restaurat';
 //import { platoService } from '../../shared/model/platos/platos.service';
 //import { Geolocation } from '@ionic-native/geolocation';
 //declare var google;
@@ -37,7 +38,8 @@ export class MapRestaurantPage {
   location:Location;
   locationIsSet = false;
   constructor(public navCtrl: NavController, public navParams: NavParams, public mapService: PlaceMapService,
-    public geolocation:Geolocation, public platform: Platform, public placeService: PlaceService ) {
+    public geolocation:Geolocation, public platform: Platform, public placeService: PlaceService,
+    public alertCtrl : AlertController ) {
       this.place = navParams.data; 
       this.ioniciarGeolocalizacion();
   }
@@ -86,7 +88,9 @@ export class MapRestaurantPage {
   actual(){
     console.log(this.lat, this.lng);
     this.placeService.saveCords(this.lat, this.lng, this.place)
-    console.log('guardado');
+    this.alerta();
+    this.navCtrl.pop();
+    //this.navCtrl.push( PictureRestauratPage );
   }
 
   ioniciarGeolocalizacion(){
@@ -99,6 +103,28 @@ export class MapRestaurantPage {
     });
 
     
+  }
+
+  alerta(){
+    const alert = this.alertCtrl.create({
+      title: 'guardado',
+      subTitle: 'posicion Guardada exitosamente',
+      buttons: ['Aceptar']
+    });
+    alert.present();
+  }
+
+  cancelar(){
+    this.navCtrl.pop();
+  }
+
+  ayuda() {
+    const alert = this.alertCtrl.create({
+      title: 'Ayuda',
+      subTitle: 'Active su GPS Para que la aplicacion detecte la posicion actual de su dispositivo o arrastre el marcador del mapa hacia la pocision en que se encuentra su restaurante',
+      buttons: ['OK']
+    });
+    alert.present();
   }
  
 }

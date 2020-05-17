@@ -1,15 +1,12 @@
 
 <ion-header>
 
-  <ion-navbar color="danger" class="menu">
-    <button ion-button menuToggle icon-only large>
+  <ion-navbar color="you" class="menu">
+    <button ion-button menuToggle icon-only large item-start>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-avatar item-start>
-      
-    </ion-avatar>
-    <div ><h3 class="title">Gastronomia Chuquisaca</h3></div>
-    <!--ion-title color="danger">Gastronomia Chuquisaca</ion-title-->
+    <!--div ><h3 class="title">Gastronomia Chuquisaca</h3></div-->
+    <ion-title color="">Gastronomia de Chuquisaca</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -35,7 +32,9 @@
   </ion-row>
 </ion-grid>
 
-
+<ion-fab right bottom>
+  <button ion-fab color="you" [navPush]="search"><ion-icon name="md-search"></ion-icon></button>
+</ion-fab>
 
 
 

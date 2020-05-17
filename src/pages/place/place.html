@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar color="danger" class="menu">
+  <ion-navbar color="you" class="menu">
     <ion-title>{{place.title}}</ion-title>
   </ion-navbar>
 </ion-header>
@@ -14,19 +14,108 @@
     </ion-slides>
   </div>
     
-  <div class="content back"> 
+  <!--div class="content back"> 
     <h2 class="izq">{{place.title}}</h2>
     <button ion-button icon-start class="der" (click)="save()">
         <ion-icon name="md-thumbs-up"></ion-icon> Guardar
     </button>
-  </div>
-  <div class="place-description" *ngIf="place.description != '' " padding-horizontal [innerHTML]="placeDescription">
-  </div>
+  </div-->
 
-  <button class="btn-readme" ion-button clear (click)="readMore()" *ngIf="!isReadingMore"><ion-icon name="md-add"></ion-icon> Leer más</button>
-  <button class="btn-readme" ion-button clear (click)="readLess()" *ngIf="isReadingMore"><ion-icon name="md-remove"></ion-icon> Mostrar menos
-  </button>
- 
+  <ion-card>      
+      <ion-card-content>
+        <ion-card-title>
+          {{place.title}}
+        </ion-card-title>
+        <p>
+            {{place.excerpt}}
+        </p>
+
+      </ion-card-content>
+      <ion-row no-padding>
+          <ion-col>
+              <button ion-button icon-start clear small  (click)="save()">
+                  <ion-icon name="md-bookmark"></ion-icon> Guardar
+              </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button icon-start clear small [navPush]="comentarioPage" [navParams]="place.$key">
+                <ion-icon name="md-text"></ion-icon> Comentarios 
+            </button>
+          </ion-col>
+        </ion-row>
+  </ion-card>
+  
+  <ion-card>    
+      <ion-card-content>
+        <ion-card-title>
+          Detalles
+        </ion-card-title>
+        <div class="place-description" *ngIf="place.description != '' " padding-horizontal [innerHTML]="placeDescription">
+            </div>
+          
+        <button class="btn-readme" ion-button clear (click)="readMore()" *ngIf="!isReadingMore"> Leer más</button>
+        <button class="btn-readme" ion-button clear (click)="readLess()" *ngIf="isReadingMore"> Mostrar menos
+            </button>
+      </ion-card-content>
+    
+    </ion-card>
+
+    <ion-card>
+        <ion-card-content>
+          <ion-card-title>
+            Contacto
+          </ion-card-title>
+        </ion-card-content>
+      
+        <ion-list>
+          <a ion-item href="tel:{{place.contact}}">
+            <ion-icon name="md-call" item-start color="primary"></ion-icon>
+            Llamar
+            <ion-note item-end>
+                {{place.contact}}
+            </ion-note>
+          </a>
+      
+          <a ion-item href="https://api.whatsapp.com/send?phone=591{{place.contact}}">
+            <ion-icon name="logo-whatsapp" item-start color="whatsapp"></ion-icon>
+            Enviar Mensaje
+            <ion-note item-end>
+                {{place.contact}}
+            </ion-note>
+          </a>
+      
+          <a ion-item href="{{place.social}}">
+            <ion-icon name="logo-facebook" item-start color="facebook"></ion-icon>
+            Visitar Pagina
+          </a>
+        </ion-list>
+      </ion-card>
+
+      <ion-card>      
+          <ion-card-content>
+            <ion-card-title>
+              Direccion
+            </ion-card-title>
+            <p>
+                {{place.address}}
+            </p>
+          </ion-card-content>
+      </ion-card>
+      <ion-card>      
+          <ion-card-content>
+            <ion-card-title>
+              Horario de atencion
+            </ion-card-title>
+            <p>
+                {{place.hour}}
+            </p>
+          </ion-card-content>
+      </ion-card>
+
+      
+
+
+ <!--
   <ion-card class="card" *ngIf="place.contact != '' ">
     <ion-card-header>
       <h1 ion-text color="rojost">
@@ -74,6 +163,7 @@
         <div [innerHTML]="placeDetail"></div>
     </ion-card-content>
   </ion-card>
+-->
     <!--<ion-col col-12 col-md-4>
       <div #map id="map"></div><ion-icon name="restaurant"></ion-icon>
 
@@ -84,7 +174,7 @@
 
 
   <ion-fab right bottom>
-    <a ion-fab [navPush]="platosPage" [navParams]="place.$key"><ion-icon name="md-restaurant"></ion-icon></a>
+    <a ion-fab color="you" [navPush]="platosPage" [navParams]="place"><ion-icon name="md-restaurant"></ion-icon></a>
   </ion-fab>
 
 <!--div class="content" [hidden]="!ver">
@@ -101,18 +191,17 @@
       <span item-left class="distance">({{distance}})</span>
     </div>
   </div>
+  <div padding>
+    <button ion-button color="secondary" full (click)="displayRoute()" *ngIf="!isDisplayingRoute">
+      <ion-icon large name='compass'></ion-icon>
+      &nbsp;&nbsp;Cómo llegar
+    </button>
+    <button ion-button full (click)="displayPlaceLocation()" *ngIf="isDisplayingRoute">
+      <ion-icon large name='pin'></ion-icon>
+        &nbsp;&nbsp;Ubicación del lugar
+      </button>
+    </div>
 
-
-
-<button ion-button color="secondary" full round (click)="displayRoute()" *ngIf="!isDisplayingRoute">
-  <ion-icon large name='compass'></ion-icon>
-  &nbsp;&nbsp;Cómo llegar
-</button>
-
-<button ion-button full round (click)="displayPlaceLocation()" *ngIf="isDisplayingRoute">
-  <ion-icon large name='pin'></ion-icon>
-    &nbsp;&nbsp;Ubicación del lugar
-</button>
 
   <!--<ion-fab right bottom>
     <button ion-fab mini (click)="navigate()"><ion-icon name="navigate"></ion-icon></button>

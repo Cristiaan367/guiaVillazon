@@ -1,0 +1,44 @@
+<!--
+  Generated template for the SearchPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="you">
+    <ion-title>Buscar</ion-title>
+  </ion-navbar>
+  <ion-segment [(ngModel)]="mod" color="you">
+      <ion-segment-button value="rest">
+        Restaurantes
+      </ion-segment-button>
+      <ion-segment-button value="platos">
+        Especialidad
+      </ion-segment-button>
+    </ion-segment>
+</ion-header>
+
+
+<ion-content padding>
+    <div [ngSwitch]="mod">
+      <div *ngSwitchCase="'rest'">
+      <ion-searchbar [(ngModel)]="terms"></ion-searchbar>
+        <ion-list>
+          <button ion-item *ngFor="let place of places$  | async |search : terms" [navPush]="placePage" [navParams]="place"> 
+            {{place.title}} 
+          </button>
+        </ion-list>
+      </div>
+      <div *ngSwitchCase="'platos'">
+          <ion-searchbar [(ngModel)]="terms"></ion-searchbar>
+            <ion-list>
+              <button ion-item *ngFor="let place of places$  | async |searchplato : terms" [navPush]="placePage" [navParams]="place"> 
+                {{place.excerpt}} 
+              </button>
+            </ion-list>
+      </div>
+      </div>
+
+  
+</ion-content>

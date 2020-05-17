@@ -5,6 +5,7 @@ import { AreaService } from '../../shared/model/area/area.service';
 import { Observable } from 'rxjs/Observable';
 import { ListPlacesPage } from '../list-places/list-places';
 import { Network } from '@ionic-native/network';
+import { SearchPage } from '../search/search';
 @IonicPage()
 @Component({
   selector: 'page-list-areas',
@@ -13,6 +14,7 @@ import { Network } from '@ionic-native/network';
 export class ListAreasPage {
   showLoader: boolean = true;
   loading: Loading
+  search = SearchPage;
   listPlaces = ListPlacesPage;
   areas$: Observable<Area[]>;
   areaDetail :string;
@@ -55,7 +57,7 @@ export class ListAreasPage {
     if (!this.showLoader) return;
 
     this.loading = this.loadingCtrl.create({
-      content: 'Cargando Categorias...',
+      content: '',
       duration: 3000
     });
 
@@ -63,7 +65,4 @@ export class ListAreasPage {
     this.showLoader = false;
 
   }
-
-
-
 }

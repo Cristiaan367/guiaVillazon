@@ -1,57 +1,55 @@
-<!--
-  Generated template for the NewRestaurantPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>Formulario de Registro</ion-title>
+  <ion-navbar color="you">
+    <ion-title>Registrar nuevo Restaurante</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content padding>
-  <img [src]="base64Image" *ngIf="base64Image" />
-	<div text-center>
-    <button ion-button color="primary" round (click)="galletyOptions()" icon-start>
-            <ion-icon name="md-photos"></ion-icon>
-            Galeria
-    </button>
-  </div>
+<ion-content>
+  <ion-card>
+  <ion-card-content>
+    <ion-card-title>
+      Datos Restaurante
+    </ion-card-title>
   <!--datos-->
     <ion-list>
         <ion-item>
-            <ion-label>Ciudad</ion-label>
-            <ion-select [(ngModel)]="rest.areaId">
+            <ion-label>Seleccionar ciudad</ion-label>
+            <ion-select [(ngModel)]="rest.areaId" interface="popover">
               <ion-option *ngFor="let area of areas$ | async" [value]="area.$key">{{area.title}}</ion-option>
             </ion-select>
-          </ion-item>
+        </ion-item>
+        <ion-item>
+            <ion-label>Tipo de Restaurante</ion-label>
+            <ion-select [(ngModel)]="rest.excerpt" interface="popover">
+                <ion-option value="Cafe restaurant">cafe restaurant</ion-option>
+                <ion-option value="Gourmet">Gourmet</ion-option>
+                <ion-option value="Especialidad">especialidad</ion-option>
+                <ion-option value="Familiar">Familiar</ion-option>
+                <ion-option value="Comida rapida">Comida rapida</ion-option>
+                <ion-option value="Vegetariano">Vegetariano</ion-option>
+                <ion-option value="Nacional y tradicional">Nacional y tradicional</ion-option>
+            </ion-select>
+        </ion-item>
         <ion-item>
           
           <ion-label floating>Nombre del Restaurant</ion-label>
           <ion-input type="text" [(ngModel)]="rest.title"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label floating>Descripcion Corta</ion-label>
-            <ion-input type="text" [(ngModel)]="rest.excert"></ion-input>
-        </ion-item>
-        <ion-item>
             <ion-label floating>Descripcion</ion-label>
-            <ion-input type="text" [(ngModel)]="rest.description"></ion-input>
+            <ion-textarea type="text" [(ngModel)]="rest.description"></ion-textarea>
         </ion-item>
         <ion-item>
-            <ion-label floating>Contacto</ion-label>
+            <ion-label floating>Num Celular(Whatsapp)</ion-label>
             <ion-input type="number" [(ngModel)]="rest.contact"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label floating>Facebook/Red Social</ion-label>
+            <ion-label floating>Pagina Web (Facebook)</ion-label>
             <ion-input type="text" [(ngModel)]="rest.social"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label floating>Horario de atencion</ion-label>
+            <ion-label floating>Horarios de atencion</ion-label>
             <ion-input type="text" [(ngModel)]="rest.hour"></ion-input>
         </ion-item>
         <ion-item>
@@ -59,6 +57,13 @@
             <ion-input type="text" [(ngModel)]="rest.address"></ion-input>
         </ion-item>
       </ion-list>
-      <button ion-button full (click)="save()">Guardar</button>
-      <button ion-button full color="you">Cancelar</button>
+      <div class="arriba"></div>
+      <button ion-button full (click)="save()">Registrar</button>
+      <button ion-button full color="you" (click)="cancelar()">Cancelar</button>
+  </ion-card-content>
+      
+</ion-card>
+<div class="arriba">
+    
+</div>
 </ion-content>

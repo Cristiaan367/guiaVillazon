@@ -7,6 +7,9 @@ import { MapRestaurantPage } from '../../pages/map-restaurant/map-restaurant';
 import { Place } from '../../shared/model/place/place';
 import { EditRestaurantPage } from '../../pages/edit-restaurant/edit-restaurant';
 import { PictureRestauratPage } from '../../pages/picture-restaurat/picture-restaurat';
+import { AuthService } from '../../shared/auth/auth.service';
+import { NewPlatoPage } from '../new-plato/new-plato';
+import { ComentariosPage } from '../comentarios/comentarios';
 /**
  * Generated class for the ListRestaurantPage page.
  *
@@ -26,16 +29,20 @@ export class ListRestaurantPage {
   mapRestPage = MapRestaurantPage;
   editRestPage = EditRestaurantPage;
   pictRestPage = PictureRestauratPage;
+  newPlato = NewPlatoPage;
+  comentarioPage = ComentariosPage;
   idUser
   places$: Observable<Place[]>;
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public placeServ: PlaceService, public alertCtrl: AlertController) {
-    this.idUser = navParams.data;
-    
+    public placeServ: PlaceService, public alertCtrl: AlertController,
+    public auth:AuthService) {
+    //this.idUser = navParams.data;
+    this.idUser = auth.getid();
   }
 
   ionViewDidLoad() {
     console.log('Cargando lugares del usuario: '+ this.idUser);
+    this.showAlert();
     this.cargarDatos();
   }
 
@@ -64,6 +71,15 @@ export class ListRestaurantPage {
       ]
     });
     confirm.present();
+  }
+
+  showAlert() {
+    const alert = this.alertCtrl.create({
+      title: 'Mi Restaurante',
+      subTitle: 'Las sugerencias de restaurante que son enviadas en esta aplicacion seran habilitadas por el administrador de la aplicacion.',
+      buttons: ['Aceptar']
+    });
+    alert.present();
   }
 
 }

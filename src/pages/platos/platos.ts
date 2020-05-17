@@ -18,12 +18,12 @@ import { Observable } from 'rxjs/Observable';
 })
 export class PlatosPage {
   platos$: Observable<Plato[]>;
-  place = Place;
+  place: Place ;
   id;
   constructor(public navCtrl: NavController, public navParams: NavParams, private platoservice:platoService,) {
     this.place = navParams.data;
-    this.id = this.place;
-    console.log('aver: '+ this.place);
+    this.id = this.place.$key;
+    console.log('aver: '+ this.id);
   }
 
   ionViewDidLoad() {

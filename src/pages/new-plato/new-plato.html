@@ -1,0 +1,35 @@
+
+<ion-header>
+
+  <ion-navbar color="you">
+    <ion-title>Crear Menu</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  
+    <ion-card>
+
+        <ion-card-content>
+          <ion-card-title>
+            Lista de Platos
+          </ion-card-title>
+          <ion-list>
+            <ion-item *ngFor="let plato of platos$ | async">
+              {{plato.name}}
+              <button ion-button small item-end (click)="delete(plato)" color="you">Eliminar</button>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      
+      </ion-card>
+
+
+
+
+  <ion-fab right bottom>
+      <button ion-fab color="you" (click)="alertNewPlato()"><ion-icon name="md-add"></ion-icon></button>
+  </ion-fab>
+</ion-content>

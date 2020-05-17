@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav,Platform,ModalController } from 'ionic-angular';
+import { Nav,Platform,ModalController,NavPush } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 //import { SplashPage } from '../pages/splash/splash';
@@ -14,7 +14,14 @@ import { LoginPage } from '../pages/login/login';
 import { PerfilPage } from '../pages/perfil/perfil';
 import { AuthService } from '../shared/auth/auth.service';
 import { SplashPage } from '../pages/splash/splash';
-import { PushObject, PushOptions, Push } from '@ionic-native/push';
+//import { PushObject, PushOptions, Push } from '@ionic-native/push';
+import { ListRestaurantPage } from '../pages/list-restaurant/list-restaurant'
+import { SearchPage } from '../pages/search/search';
+import { HelpPage } from '../pages/help/help';
+import { AboutPage } from '../pages/about/about';
+import { stringify } from '@angular/core/src/util';
+//import { ListRestaurantPage } from '../pages/list-restaurant/list-restaurant';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -25,13 +32,17 @@ export class MyApp {
   showSplash = true;
   rootPage:any= LoginPage;
   pushPage: any;
+  //public aut
+  listRest = ListRestaurantPage;
 
   //login:any= LoginPage;
   //inicio:any = ListAreasPage;
 
   constructor( platform: Platform, statusBar: StatusBar, 
     splashScreen: SplashScreen, modalCtrl: ModalController,
-    private auth: AuthService, private push: Push){
+    public auth: AuthService){
+      //this.aut= auth.getid();
+
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -42,7 +53,6 @@ export class MyApp {
       //splashScreen.hide();
       let splash = modalCtrl.create(SplashPage);
       splash.present();
-      this.pushnoti();
       /*this.fcm.getToken().then(
         (token: string) => {
           console.log("este es el token "+ token);
@@ -73,13 +83,24 @@ export class MyApp {
       .subscribe(
         user=> {
           if(user){
+            /*if(!user.displayName){
+              //this.rootPage = ListRestaurantPage
+              //this.rootPage = ListAreasPage
+            }
+            else{
+              this.rootPage = ListAreasPage;
+              //console.log(JSON.stringify(user));
+              console.log('usuario:'+user.displayName)
+            }*/
             this.rootPage = ListAreasPage;
           } else {
-            this.rootPage = LoginPage;
+            this.rootPage = HelpPage;
           }
         },
-        () =>{this.rootPage = LoginPage;}
+        () =>{this.rootPage = HelpPage}
       );
+
+      //this.pushnoti();
 
     
   }
@@ -114,7 +135,25 @@ export class MyApp {
     this.nav.push(PerfilPage);
   }
 
-  pushnoti(){
+  sugerencias(){
+    this.nav.push(ListRestaurantPage)
+    //this.navParams.get(this.auth.getid());
+    //this.nav.push(this.listRest);
+  }
+
+  help(){
+    this.nav.push(HelpPage)
+  }
+
+  search(){
+    this.nav.push(SearchPage)
+  }
+
+  about(){
+    this.nav.push(AboutPage);
+  }
+
+  /*pushnoti(){
     const options: PushOptions = {
       android: {
         senderID: '177051075379'
@@ -134,6 +173,6 @@ export class MyApp {
    pushObject.on('registration').subscribe((registration: any) => console.log('Device registered', registration));
    
    pushObject.on('error').subscribe(error => console.error('Error with Push plugin', error));
-  }
+  }*/
 }
 

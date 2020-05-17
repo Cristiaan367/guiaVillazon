@@ -1,10 +1,13 @@
 <ion-content>
 	<div class="port">
 	<img src="./assets/imgs/icon.png" class="pic">
+	<div class="pad">
+		<h1 ion-text color="you">Gastronomia Chuquisaca</h1>
+	</div>
 	</div>
 	<form (ngSubmit)="login()" [formGroup]="loginForm">
 		<ion-list inset>
-
+			<!--
 			<ion-item>
 				<ion-input type="text" placeholder="Correo electronico o Email" formControlName="email"></ion-input>
 			</ion-item>
@@ -13,20 +16,35 @@
 			<ion-item>
 				<ion-input type="password" placeholder="Contraseña" formControlName="password"></ion-input>
 			</ion-item>
+			-->
 
 		</ion-list>
 
+		<div class="pad1">
+			<div class="but">
+				<button ion-button color="you" round icon-left block outline (click)="singGoogle()">
+							<ion-icon name="logo-google"></ion-icon>
+							iniciar con Google
+				</button>
+			</div>
+		</div>
+
 		<div padding-horizontal>
 			
-
-			<button ion-button color="you" round full type="submit" >
-					<ion-icon name="person"></ion-icon>Iniciar Sesion</button>
+			<!--
+			<button ion-button color="you" round full icon-left type="submit" >
+					<ion-icon name="person"></ion-icon>
+					Iniciar Sesion
+			</button>
 			<div class="login-footer">
+				<br>
 				<p>
-					<a (click)="signup()">Olvido Su Contraseña?</a>
-					If you're a new user, please sign up.
+					<a (click)="signup()">Registrese como administrador de restaurante</a>
+					o Utilise su cuenta de <b>Google</b> para iniciar Sesion.
 				</p>
+				<br>
 			</div>
+			-->
 
 			<ion-list>
 
@@ -35,10 +53,13 @@
 					Inicie Sesion con Google
 				</button>
 
+
+				<!--
 				<button ion-button color="you" round icon-left block outline (click)="signup()">
-					<ion-icon name="person-add"></ion-icon>
-					Registrese
+					<ion-icon name="md-restaurant"></ion-icon>
+					Administrador Restaurante
 				</button>
+				-->
 			</ion-list>
 		</div>
 	</form>

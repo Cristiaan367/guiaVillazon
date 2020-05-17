@@ -73,7 +73,33 @@ export class PlaceService extends FirebaseService {
     return super.actionAsObservable(action);
 
   }
+  
+  savePictureUser(idrest, picture): Observable<any> {
 
+    let link;
+    /*updates[`/places/${newPlaceKey}`] = place;
+    updates[`/placesPerArea/${place.areaId}/${newPlaceKey}`] = true;
+    updates[`/placesPerAdmin/${admin}/${newPlaceKey}`] = true;
+
+    const action: firebase.Promise<any> = this.db.object('/').update(updates);
+    return super.actionAsObservable(action);*/
+    firebase.storage().ref('/restaurante').child('restaurante')
+    .child(idrest + 'Picture.jpg')
+    .putString(picture, 'base64', {contentType: 'image/jpeg'})
+    .then((savedPicture) => {
+     link = savedPicture.downloadURL;
+    //var post = this.DbRef.push(resraurante).key;
+    var updates={};
+    updates[`/places/${idrest}/images/0`] = link;
+    //updates['/places/'+idrest+'/'+images+/] = true;
+    //updates['/CategoriaRestaurante/'+resraurante['ciudad']+'/'+post] = true;
+    firebase.database().ref('/').update(updates);
+    //this.DbRef.update(updates);
+
+    });
+    return 
+
+  }
   saveCords(lat, lng, plc){
 
     let updates: any = {};

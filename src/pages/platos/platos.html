@@ -6,26 +6,38 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Menu de Platos</ion-title>
+  <ion-navbar color="you">
+    <ion-title>{{place.title}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <div padding> <h2>Menu de Platos</h2></div>
   <div class="text">
-      <h1>Menu</h1>
+      <img src="{{place.images[0]}}" *ngIf="place.images"  alt="" class="avatar">
+      <img src="../../assets/imgs/alter.png" *ngIf="!place.images" class="avatar" alt="">
+      <h3>{{place.title}}</h3>
+      <ion-note>
+          {{place.excerpt}}
+      </ion-note>
   </div>
-  <div *ngFor="let plato of platos$ | async">
-    <ion-card>
-        <ion-item>
-          <b>{{plato.name}}</b>
-          <ion-badge color="secondary" item-end>{{plato.price}} Bs.</ion-badge>
-        </ion-item> 
+
+  <ion-card *ngFor="let plato of platos$ | async">
       <ion-card-content>
-        {{plato.description}}
+        <ion-card-title>
+            {{plato.name}}
+        </ion-card-title>
+        <p>{{plato.description}}</p>
       </ion-card-content>
-    </ion-card>
-  </div>
+      <ion-item>
+          <ion-icon name='logo-usd' item-start color="secondary" ></ion-icon>
+          Precio: {{plato.price}}
+          <ion-note item-end>
+          Bolivianos
+          </ion-note>
+      </ion-item>
+      
+  </ion-card>
 </ion-content>

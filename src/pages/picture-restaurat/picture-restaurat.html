@@ -6,15 +6,38 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>imagenes</ion-title>
+  <ion-navbar color="you">
+    <ion-title>Subir imagen</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <p>Seleccione una imagen de su Galeria.</p>
-  <button ion-button full>Seleccionar Imagen</button>
+  <img [src]="base64Image" *ngIf="base64Image" />
+  <img src="./assets/imgs/alter.png" *ngIf="!base64Image" />
+  
+  <ion-card>    
+      <ion-card-content>
+          <ion-card-title>
+              Selec. o tomar Fotos
+            </ion-card-title>
+          <div text-center>
+              <button ion-button color="primary" round (click)="galletyOptions()" icon-start>
+                      <ion-icon name="md-photos"></ion-icon>
+                      Galeria
+              </button>
+              <button ion-button color="primary" round (click)="takePicture()" icon-start>
+                <ion-icon name="camera"></ion-icon>Camara 
+              </button>
+            </div>
+            <p>Seleccione una imagen de su <b>Galeria</b> o tome una <b>Fotografia</b> con su telefono </p>
+            <button ion-button full (click)="guardar()">Guardar</button>
+            <button ion-button full  color="rojost" (click)="cancelar()">Cancelar</button>
+      </ion-card-content>
+      <div padding></div>
+    
+    </ion-card>
+
 
 </ion-content>

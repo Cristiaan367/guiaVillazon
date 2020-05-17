@@ -7,29 +7,59 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Registrarse</ion-title>
+    <ion-title>Administrador Restaurante</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+    <ion-card>
+    <ion-card-content>
+      <ion-card-title>
+        Registre sus datos
+      </ion-card-title>
     <form (ngSubmit)="signup()" [formGroup]="form">
       <ion-list inset>
   
         <ion-item >
-          <ion-input type="text" placeholder="Email" formControlName="email"></ion-input>
+            <ion-label floating>Correo*</ion-label>
+          <ion-input type="text" formControlName="email"></ion-input>
         </ion-item>
   
+        <ion-item>
+            <ion-label floating>Contraseña*</ion-label>
+          <ion-input type="password" formControlName="password"></ion-input>
+        </ion-item>
+
         <ion-item >
-          <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+            <ion-label floating>Nombre Propietario</ion-label>
+          <ion-input type="text" formControlName="name"></ion-input>
+        </ion-item>
+        
+        <ion-item>
+            <ion-label floating>Numero NIT</ion-label>
+            <ion-input type="text" formControlName="nit"></ion-input>
+        </ion-item>
+
+        <ion-item >
+            <ion-label floating>Direccion</ion-label>
+            <ion-input type="text" formControlName="direccion"></ion-input>
+        </ion-item>
+
+
+        
+        <ion-item>
+            <ion-label>Administrador Restaurante</ion-label>
+            <ion-toggle [(ngModel)]="rest" formControlName="rest"></ion-toggle>
         </ion-item>
       </ion-list>
   
-      <div padding-horizontal>
+      <div padding-horizontal class="pad">
   
         <button ion-button full type="submit" [disabled]="!form.valid">Registrarse</button>
       </div>
     </form>
+  </ion-card-content>
+  </ion-card>
   </ion-content>

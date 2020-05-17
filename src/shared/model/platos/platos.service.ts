@@ -23,6 +23,11 @@ export class platoService extends FirebaseService {
     let options: any = query ? { query } : {};
     return this.db.list('/platos', options).map(Plato.fromJSONArray);
   }
+  
+   findAlls(): Observable<Plato[]> {
+    return this.db.list('/platos').map(Plato.fromJSONArray);
+  }
+  
 
   /*create(plato: Plato): Observable<any> {
     delete plato.$key;

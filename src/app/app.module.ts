@@ -40,22 +40,37 @@ import { MapRestaurantPageModule } from '../pages/map-restaurant/map-restaurant.
 import { MapRestaurantPage } from '../pages/map-restaurant/map-restaurant';
 import { PictureRestauratPageModule } from '../pages/picture-restaurat/picture-restaurat.module';
 //import { PictureRestauratPageModule } from '../pages/picture-restaurat/picture-restaurat.module';
-//import { EditRestaurantPageModule } from '../pages/edit-restaurant/edit-restaurant.module';
+import { EditRestaurantPageModule } from '../pages/edit-restaurant/edit-restaurant.module';
 import {SignupPageModule} from '../pages/signup/signup.module';
 import { Network } from '@ionic-native/network'
 import { registerLocaleData } from '@angular/common';
 import localeEs  from '@angular/common/locales/es';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
-import { Push } from '@ionic-native/push';
+//import { Push } from '@ionic-native/push';
 //import { from } from 'rxjs/observable/from';
 import { AgmCoreModule } from '@agm/core';
+import { SearchPageModule } from '../pages/search/search.module';
+import { HelpPageModule } from '../pages/help/help.module';
 registerLocaleData(localeEs, 'es');
+import { AboutPageModule } from '../pages/about/about.module';
+//google
+import { GooglePlus } from '@ionic-native/google-plus';
+//pipes
+//import { SearchPipe } from '../pipes/search/search';
+//import { SortPipe} from '../pipes/sort/sort';
+//import { PipesModule } from '../pipes/pipes.module';
+import { NewPlatoPageModule } from '../pages/new-plato/new-plato.module';
+import { ComentariosPageModule } from '../pages/comentarios/comentarios.module';
+//import { ComentariosPage } from '../pages/comentarios/comentarios';
+import { comentarioService } from '../shared/model/comentarios/comentario.service';
 
 @NgModule({
   declarations: [
     MyApp,
     //LoginPage,
+    //SortPipe,
+    //PipesModule
   ],
   imports: [
     BrowserModule,
@@ -80,6 +95,12 @@ registerLocaleData(localeEs, 'es');
     NewRestaurantPageModule,
     MapRestaurantPageModule,
     PictureRestauratPageModule,
+    EditRestaurantPageModule,
+    HelpPageModule,
+    SearchPageModule,
+    AboutPageModule,
+    NewPlatoPageModule,
+    ComentariosPageModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyD8fAyrlo8ix9UoFeDFSjQ8rsFDX2wHBvs'
     }),
@@ -103,13 +124,14 @@ registerLocaleData(localeEs, 'es');
     AreaMapService,
     EventService,
     platoService,
+    comentarioService,
     LaunchNavigator,
     StatusBar,
     SplashScreen,
     Geolocation,
     Network,
-    Push,
     Camera,
+    GooglePlus,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     {provide: LOCALE_ID, useValue: 'es'},
     AngularFireAuth,

@@ -1,18 +1,69 @@
-<!--
-  Generated template for the EditRestaurantPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>edit-restaurant</ion-title>
+  <ion-navbar color="you">
+    <ion-title>Editar Restaurante</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+<ion-card>
+    <ion-card-content>
+      <ion-card-title>
+        Editar Restaurante
+      </ion-card-title>
+          <!-- Add card content here! -->
+
+    <!--datos-->
+    <ion-list>
+        <ion-item>
+            <ion-label>Seleccionar Ciudad</ion-label>
+            <ion-select [(ngModel)]="rest.areaId" interface="popover">
+              <ion-option *ngFor="let area of areas$ | async" [value]="area.$key">{{area.title}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label>Tipo de Restaurante</ion-label>
+            <ion-select [(ngModel)]="rest.excerpt" interface="popover">
+                <ion-option value="cafe restaurant">cafe restaurant</ion-option>
+                <ion-option value="gourmet">Gourmet</ion-option>
+                <ion-option value="especialidad">especialidad</ion-option>
+                <ion-option value="familiar">Familiar</ion-option>
+                <ion-option value="comida rapida">Comida rapida</ion-option>
+                <ion-option value="Vegetariano">Vegetariano</ion-option>
+                <ion-option value="nacional y tradicional">Nacional y tradicional</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+          
+          <ion-label floating>Nombre del Restaurant</ion-label>
+          <ion-input type="text" [(ngModel)]="rest.title"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Descripcion</ion-label>
+            <ion-textarea type="text" [(ngModel)]="rest.description"></ion-textarea>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Num. Celular/Whatsapp</ion-label>
+            <ion-input type="number" [(ngModel)]="rest.contact"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Pagina web(Facebook)</ion-label>
+            <ion-input type="text" [(ngModel)]="rest.social"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Horario de atencion</ion-label>
+            <ion-input type="text" [(ngModel)]="rest.hour"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Direccion</ion-label>
+            <ion-input type="text" [(ngModel)]="rest.address"></ion-input>
+        </ion-item>
+      </ion-list>
+      <div class="arriba"></div>
+      <button ion-button full (click)="update()">Actualizar</button>
+      <button ion-button full color="you" (click)="cancelar()">Cancelar</button>
+  </ion-card-content>    
+</ion-card>
+<div class="arriba"></div>
 
 </ion-content>

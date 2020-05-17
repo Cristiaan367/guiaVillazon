@@ -15,9 +15,10 @@ export class Place {
   contact:number;
   social:string;
   hour:string;
+  enabled:boolean;
 
-  static fromJSON({$key, title, description, excerpt, latitude, longitude, address, images, priority, areaId,detail,contact,social,hour}: any): Place {
-    return new Place($key, title, description, excerpt, latitude, longitude, address, images, priority, areaId,detail,contact,social,hour );
+  static fromJSON({$key, title, description, excerpt, latitude, longitude, address, images, priority, areaId,detail,contact,social,hour, enabled}: any): Place {
+    return new Place($key, title, description, excerpt, latitude, longitude, address, images, priority, areaId,detail,contact,social,hour, enabled );
   }
 
   static fromJSONArray(json: any[]): Place[] {
@@ -38,7 +39,8 @@ export class Place {
     detail: string,
     contact: number,
     social: string,
-    hour: string
+    hour: string,
+    enabled: boolean
   ) {
 
     this.$key = $key || '';
@@ -55,6 +57,7 @@ export class Place {
     this.contact = contact || 0;
     this.social = social || '';
     this.hour = hour || '';
+    this.enabled = false;
   }
 
 }

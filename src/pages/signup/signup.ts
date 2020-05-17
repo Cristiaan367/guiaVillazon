@@ -12,13 +12,19 @@ import { AuthService } from '../../shared/auth/auth.service';
 })
 export class SignupPage {
   signupError: string;
-	form: FormGroup;
+  form: FormGroup;
+  
+  rest = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     fb:FormBuilder, private auth:AuthService) {
       this.form = fb.group({
         email: ['', Validators.compose([Validators.required, Validators.email])],
-        password: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
+        password: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
+        name: ['', Validators.compose([Validators.required])],
+        nit: ['', Validators.compose([Validators.required])],
+        direccion: ['', Validators.compose([Validators.required])],
+        rest: ['',Validators.compose([Validators.required])]
       });
   }
 
@@ -30,7 +36,11 @@ export class SignupPage {
 		let data = this.form.value;
 		let credentials = {
 			email: data.email,
-			password: data.password
+      password: data.password,
+      name: data.name,
+      nit: data.nit,
+      direccion: data.direccion,
+      rest: data.rest
 		};
 		this.auth.signUp(credentials).then(
 			() => this.navCtrl.setRoot(ListAreasPage),
